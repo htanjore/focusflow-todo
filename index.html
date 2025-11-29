@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FocusFlow Todos</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app" role="application" aria-label="Todo list application">
+    <header class="app-header">
+      <h1>FocusFlow</h1>
+      <p class="app-tagline">A world-class todo list for focused work.</p>
+    </header>
+
+    <main class="app-main">
+      <section class="panel panel-primary" aria-labelledby="add-task-heading">
+        <div class="panel-header">
+          <h2 id="add-task-heading">Add a task</h2>
+        </div>
+        <form id="task-form" class="task-form" autocomplete="off">
+          <label class="field">
+            <span class="field-label">Task</span>
+            <input id="task-title" name="title" type="text" required
+                   placeholder="What do you need to get done?" />
+          </label>
+
+          <div class="field-grid">
+            <label class="field">
+              <span class="field-label">Due date</span>
+              <input id="task-due" name="due" type="date" />
+            </label>
+
+            <label class="field">
+              <span class="field-label">Priority</span>
+              <select id="task-priority" name="priority">
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+                <option value="low">Low</option>
+              </select>
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            Add task
+            <span class="hint">(Enter)</span>
+          </button>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="controls-heading">
+        <div class="panel-header panel-header-row">
+          <h2 id="controls-heading">Tasks</h2>
+          <div class="panel-header-meta" aria-live="polite" id="task-summary"></div>
+        </div>
+
+        <div class="toolbar" aria-label="Task tools">
+          <div class="toolbar-group">
+            <label class="search-field">
+              <span class="visually-hidden">Search tasks</span>
+              <input id="search" type="search" placeholder="Search (⌘/Ctrl + F)" />
+            </label>
+
+            <div class="segmented-control" role="radiogroup" aria-label="Filter by status">
+              <button type="button" class="segmented-control-item is-active" data-filter="all" role="radio" aria-checked="true">All</button>
+              <button type="button" class="segmented-control-item" data-filter="active" role="radio" aria-checked="false">Active</button>
+              <button type="button" class="segmented-control-item" data-filter="completed" role="radio" aria-checked="false">Completed</button>
+            </div>
+
+            <label class="field compact">
+              <span class="field-label">Sort</span>
+              <select id="sort">
+                <option value="created-desc">Newest first</option>
+                <option value="created-asc">Oldest first</option>
+                <option value="due-asc">Due date (soonest)</option>
+                <option value="due-desc">Due date (latest)</option>
+                <option value="priority-desc">Priority (high → low)</option>
+                <option value="priority-asc">Priority (low → high)</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="toolbar-group toolbar-group-right">
+            <button type="button" class="btn btn-ghost" id="complete-selected" disabled>Complete selected</button>
+            <button type="button" class="btn btn-ghost" id="clear-completed" disabled>Clear completed</button>
+          </div>
+        </div>
+
+        <div class="task-list-wrapper" aria-describedby="drag-hint">
+          <p id="drag-hint" class="hint-text">Drag tasks with the handle or use Alt+↑/↓ to reorder.</p>
+          <ul id="task-list" class="task-list" aria-label="Todo items"></ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Keyboard: <kbd>N</kbd> new task · <kbd>/</kbd> or <kbd>⌘/Ctrl+F</kbd> search · <kbd>A</kbd>/<kbd>C</kbd>/<kbd>X</kbd> filter · <kbd>⌘/Ctrl+Enter</kbd> complete.</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
